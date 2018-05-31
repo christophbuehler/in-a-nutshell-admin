@@ -11,15 +11,17 @@
   mat-drawer {
     width: 420px;
     .tree {
+      overflow: auto;
       ul, li {
         margin-top: 0;
         margin-bottom: 0;
         list-style-type: none;
       }
       .mat-tree-node {
-        .mat-button {
+        .mat-button.title {
           text-align: left;
           padding: 0 8px;
+          min-width: 0;
         }
         &.active {
           color: #4283f2;
@@ -30,6 +32,14 @@
         &.invisible {
           display: none;
         }
+      }
+    }
+    .new-topic-btn {
+      padding: 16px 0;
+      border-top: 1px solid rgba(0, 0, 0, .1);
+      button {
+        border: 2px solid rgba(0, 0, 0, .9);
+        border-radius: 16px;
       }
     }
     .file-upload {
@@ -74,6 +84,7 @@
         markdown {
           white-space: normal;
           padding-left: 16px;
+          overflow: auto;
           /deep/ img {
             max-width: 100%;
           }

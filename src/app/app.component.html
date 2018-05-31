@@ -1,10 +1,10 @@
 <mat-drawer-container>
   <mat-drawer mode="side" opened="true" fxLayout="column" class="mat-elevation-z4">
-    <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="tree">
+    <mat-tree fxFlex [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="tree">
       <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
         <li class="mat-tree-node" [class.active]="node.id === (topic | async)?.id">
           <!-- <button mat-icon-button disabled></button> -->
-          <button mat-button (click)="selectTopic(node.id)">
+          <button class="title" mat-button (click)="selectTopic(node.id)">
             {{node.title}}
           </button>
           <button mat-icon-button title="Add Sub Topic" (click)="createTopic(node)">
@@ -20,7 +20,7 @@
                 {{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
               </mat-icon>
             </button> -->
-            <button mat-button (click)="selectTopic(node.id)">
+            <button class="title" mat-button (click)="selectTopic(node.id)">
               {{node.title}}
             </button>
             <button mat-icon-button title="Add Sub Topic" (click)="createTopic(node)">
@@ -34,7 +34,7 @@
         </li>
       </mat-nested-tree-node>
     </mat-tree>
-    <div fxLayout="row" fxLayoutAlign="center center">
+    <div fxLayout="row" fxLayoutAlign="center center" class="new-topic-btn">
       <button mat-button (click)="createTopic()" *ngIf="(topicId | async) !== -1">
         <mat-icon>add</mat-icon>
         new topic
@@ -42,7 +42,7 @@
     </div>
     <span fxFlex></span>
     <div class="file-upload">
-      <b>Upload images</b><br>
+      <b>upload images</b><br>
       <input type="file" (change)="uploadFile($event)" placeholder="Upload file" accept=".png,.gif,.jpg" multiple>
     </div>
   </mat-drawer>
