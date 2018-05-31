@@ -9,7 +9,7 @@
     height: 100%;
   }
   mat-drawer {
-    width: 320px;
+    width: 420px;
     .tree {
       ul, li {
         margin-top: 0;
@@ -19,13 +19,14 @@
       .mat-tree-node {
         .mat-button {
           text-align: left;
+          padding: 0 8px;
         }
         &.active {
-          background: #4283f2;
-          color: #fff;
+          color: #4283f2;
         }
       }
       ul {
+        padding-left: 24px;
         &.invisible {
           display: none;
         }
@@ -45,6 +46,9 @@
     box-sizing: border-box;
     padding: 16px;
     border-radius: 4px;
+    mat-form-field {
+      width: 380px;
+    }
     .body {
       width: 100%;
       white-space: nowrap;
@@ -67,14 +71,11 @@
             border: 2px solid rgba(0, 0, 0, .8);
           }
         }
-        markdown, textarea {
-          display: block;
-          line-height: 1.5;
-          font-size: 14px;
-          padding: 16px;
-          color: rgba(0, 0, 0, 0.9);
+        markdown {
+          white-space: normal;
+          padding-left: 16px;
           /deep/ img {
-              max-width: 100%;
+            max-width: 100%;
           }
           /deep/ h4 {
               border-bottom: 0.5px solid rgba(0,0,0,.2);
@@ -82,6 +83,13 @@
               padding-bottom: 4px;
               font-size: 16px;
           }
+        }
+        markdown, textarea {
+          display: block;
+          line-height: 1.5;
+          font-size: 14px;
+          padding: 16px;
+          color: rgba(0, 0, 0, 0.9);
         }
       }
     }
