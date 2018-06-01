@@ -49,7 +49,7 @@
     </div>
     <div class="inner" *ngIf="topic | async">
       <form [formGroup]="group">
-        <h1>{{(topic | async)?.title}}</h1>
+        <h1 *ngIf="mode === 'view'">{{(topic | async)?.title}}</h1>
         <div *ngIf="mode === 'edit'">
           <mat-form-field>
             <input matInput placeholder="Title" formControlName="title">
