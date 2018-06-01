@@ -23,7 +23,7 @@ export class ImagePickerOverlayComponent implements OnInit {
   }
 
   showCopyMsg(fileName: string) {
-    this.snackBar.open(`Copied image ${fileName} to clipborad!`);
+    this.snackBar.open(`Copied image ${fileName} to clipborad!`, 'ok', { duration: 1000 });
   }
 
   loadAll() {

@@ -32,7 +32,6 @@ export class ImagePickerComponent implements OnInit {
 
   const config = new OverlayConfig({
     hasBackdrop: true,
-    backdropClass: 'cdk-overlay-transparent-backdrop',
     positionStrategy,
   });
 
