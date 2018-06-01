@@ -37,7 +37,6 @@ export class AppComponent {
         distinctUntilChanged(),
       )),
       map<any, Topic>(([topics, id]) => (<Topic[]>topics).find(t => t.id === id)),
-      share(),
     );
 
     this.topic.pipe(
