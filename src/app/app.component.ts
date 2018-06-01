@@ -90,7 +90,6 @@ export class AppComponent {
 
   deleteTopic() {
     this.topicId.pipe(
-      take(1),
       switchMap(id => this.topicService.deleteTopic(id)),
       tap(() => this.selectTopic(void 0)),
     ).subscribe();

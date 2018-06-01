@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatInputModule, MatToolbarModule, MatSidenavModule, MatTreeModule, MatIconModule, MatButtonModule, MatSnackBarModule } from '@angular/material';
+import { MatInputModule, MatToolbarModule, MatMenuModule, MatSidenavModule, MatTreeModule, MatIconModule, MatButtonModule, MatSnackBarModule } from '@angular/material';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { ClipboardModule } from 'ngx-clipboard';
@@ -37,6 +37,7 @@ import { ImagePickerOverlayComponent } from './image-picker/image-picker-overlay
     MatInputModule,
     MatTreeModule,
     MatSidenavModule,
+    MatMenuModule,
     MatToolbarModule,
     MarkdownModule.forRoot({}),
   ],

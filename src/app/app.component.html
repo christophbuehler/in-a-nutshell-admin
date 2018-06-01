@@ -1,5 +1,5 @@
 <mat-drawer-container>
-  <mat-drawer mode="side" opened="true" fxLayout="column" class="mat-elevation-z4">
+  <mat-drawer mode="side" opened="true" fxLayout="column">
     <mat-tree fxFlex [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="tree">
       <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
         <li class="mat-tree-node" [class.active]="node.id === (topic | async)?.id">
@@ -29,7 +29,7 @@
     </mat-tree>
     <span fxFlex></span>
     <div fxLayout="row" fxLayoutAlign="center center">
-      <button *ngIf="!(topicId | async) || !group.dirty" class="new-topic-btn"
+      <button *ngIf="(!(topicId | async) || !group.dirty) && mode === 'edit'" class="new-topic-btn"
         (click)="createTopic()" mat-button>
         <mat-icon>add</mat-icon>
         Create New Topic
@@ -40,33 +40,37 @@
     <div fxFlex class="select-topic" *ngIf="!(topic | async)" fxLayoutAlign="center center" fxLayout="column">
       <span>Welcome to In a Nutshell!<br>Select a topic to get started.</span>
     </div>
-    <div class="inner" *ngIf="topic | async">
-      <form [formGroup]="group">
-        <h1 *ngIf="mode === 'view'">{{(topic | async)?.title}}</h1>
-        <div *ngIf="mode === 'edit'">
-          <mat-form-field>
-            <input matInput placeholder="Title" formControlName="title">
-          </mat-form-field><br>
-          <mat-form-field>
-            <input matInput placeholder="Path" formControlName="path">
-          </mat-form-field>
-          <span fxFlex></span>
-          <button mat-button (click)="deleteTopic()" *ngIf="(topicId | async) !== -1">
-            <mat-icon>delete</mat-icon>
-            delete this topic
-          </button>
-        </div>
-        <div class="body" fxLayout="row">
-          <div *ngIf="mode === 'edit'" fxLayout="column">
-            <!-- <b>Content (Markdown Syntax)</b> -->
+    <div class="inner" *ngIf="topic | async" fxLayout="row">
+      <div fxFlex *ngIf="mode === 'edit'" class="edit-ui">
+        <form [formGroup]="group" fxLayout="column">
+          <header fxLayout="row">
+            <div class="input" data-placeholder="Title" fxFlex>
+              <input type="text" formControlName="title">
+            </div>
+            <div class="input" data-placeholder="Path" fxFlex>
+              <input type="text" formControlName="path">
+            </div>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Delete this Topic</span>
+              </button>
+            </mat-menu>
+          </header>
+          <div class="actions" fxLayout="row">
+            <span fxFlex>Markup syntax is supported by In a Nutshell.</span>
             <app-image-picker></app-image-picker>
-            <textarea fxFlex formControlName="body" cols="30" rows="10"></textarea>
           </div>
-          <div fxLayout="column">
-            <markdown fxFlex [data]="group.controls.body.value"></markdown>
-          </div>
-        </div>
-      </form>
+          <textarea fxFlex formControlName="body" cols="30" rows="10"></textarea>
+        </form>
+      </div>
+      <div fxFlex class="view-ui">
+        <h1>{{(topic | async)?.title}}</h1>
+        <markdown fxFlex [data]="group.controls.body.value"></markdown>
+      </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" class="extended-fab-switch mat-elevation-z2">
       <button *ngIf="(topicId | async) && group.dirty" class="save-btn"
