@@ -39,8 +39,8 @@ export class TopicDatabase {
       }));
     function trimSlashes(str) {
         return str
-            .replace(/\/\//g, '/')
-            .replace(/^\/|\/$/g, '');
+          .replace(/\/\//g, '/')
+          .replace(/^\/|\/$/g, '');
     }
   }
 }
