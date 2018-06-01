@@ -1,0 +1,24 @@
+:host {
+    display: none;
+    &.show {
+        display: block;
+        .container {
+            transition: all .2s ease;
+            background: rgba(255, 255, 255, .8);
+        }
+    }
+    .container {
+        position: absolute;
+        z-index: 1;
+        overflow: hidden;
+        img {
+            width: 1200px;
+            height: 600px;
+            max-width: 100%;
+            max-height: 100%;
+            border: 1px solid transparent;
+            box-sizing: border-box;
+            object-fit: contain;
+        }
+    }
+}

@@ -1,20 +1,25 @@
 import { RequestOptions, Headers } from '@angular/http';
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, ViewChild, ElementRef, ChangeDetectorRef, OnInit } from '@angular/core';
 import { TopicService, Topic } from './topic.service';
-import { ReplaySubject, BehaviorSubject,  of as observableOf,  merge as observableMerge,  Observable,  Subject } from 'rxjs';
+import { ReplaySubject, BehaviorSubject,  of as observableOf,  merge as observableMerge,  Observable,  Subject, fromEvent } from 'rxjs';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material';
 import { TopicDatabase, OrderedTopic } from './topic-database';
 import 'rxjs/add/operator/mergeMap';
 import { map, combineLatest, share, tap, filter, take, switchMap, distinctUntilChanged } from 'rxjs/internal/operators';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Portal } from '@angular/cdk/portal';
+import { element } from 'protractor';
+import { ImagePreviewComponent } from './image-preview/image-preview.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  @ViewChild('markdownUi', { read: ElementRef }) markdownUi: ElementRef;
+  previewImage: Observable<HTMLElement>;
   nestedTreeControl: NestedTreeControl<OrderedTopic>;
   nestedDataSource: MatTreeNestedDataSource<OrderedTopic>;
   topic: Observable<Topic>;
@@ -29,6 +34,7 @@ export class AppComponent {
   constructor(
     private topicService: TopicService,
     database: TopicDatabase,
+    cdRef: ChangeDetectorRef,
   ) {
     this.nestedTreeControl = new NestedTreeControl<OrderedTopic>(this.getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
@@ -54,6 +60,13 @@ export class AppComponent {
 
     database.dataChange
       .subscribe(data => this.nestedDataSource.data = data);
+  }
+
+  ngOnInit(): void {
+    this.previewImage = fromEvent(this.markdownUi.nativeElement, 'click').pipe(
+      map((ev: MouseEvent) => (<HTMLElement>ev.target)),
+      filter((el: HTMLElement) => el.tagName === 'IMG'),
+    );
   }
 
   selectTopic(id: number) {

@@ -40,7 +40,7 @@
     <div fxFlex class="select-topic" *ngIf="!(topic | async)" fxLayoutAlign="center center" fxLayout="column">
       <span>Welcome to In a Nutshell!<br>Select a topic to get started.</span>
     </div>
-    <div class="inner" *ngIf="topic | async" fxLayout="row">
+    <div class="inner" [class.hide]="!(topic | async)" fxLayout="row">
       <div fxFlex *ngIf="mode === 'edit'" class="edit-ui">
         <form [formGroup]="group" fxLayout="column">
           <header fxLayout="row">
@@ -69,11 +69,11 @@
       </div>
       <div fxFlex class="view-ui">
         <h1>{{(topic | async)?.title}}</h1>
-        <markdown fxFlex [data]="group.controls.body.value"></markdown>
+        <markdown #markdownUi fxFlex [data]="group.controls.body.value"></markdown>
       </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" class="extended-fab-switch mat-elevation-z2">
-      <button *ngIf="(topicId | async) && group.dirty" class="save-btn"
+    <div fxLayout="row" *ngIf="topicId | async" fxLayoutAlign="center center" class="extended-fab-switch mat-elevation-z2">
+      <button *ngIf="group.dirty" class="save-btn"
         (click)="saveTopic()" mat-button>
         <mat-icon>save</mat-icon>
         Save Changes
@@ -89,3 +89,4 @@
     </div>
   </mat-drawer-content>
 </mat-drawer-container>
+<app-image-preview [image]="previewImage"></app-image-preview>

@@ -14,12 +14,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { TopicDatabase } from './topic-database';
 import { ImagePickerComponent } from './image-picker/image-picker.component';
 import { ImagePickerOverlayComponent } from './image-picker/image-picker-overlay.component';
+import { ImagePreviewComponent } from './image-preview/image-preview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ImagePickerComponent,
     ImagePickerOverlayComponent,
+    ImagePreviewComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,13 @@
       background: #FCFCFC;
       width: 320px;
       border-right: 1px solid rgba(0, 0, 0, 0.12);
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 4px;
+      }
       .tree {
         overflow: auto;
         padding: 8px;
@@ -74,6 +81,16 @@
     box-sizing: border-box;
     border-radius: 4px;
     height: 100%;
+    &.hide {
+      display: none !important;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
     >div {
       height: 100%;
       overflow: auto;
@@ -142,9 +159,11 @@
           white-space: normal;
           overflow: auto;
           /deep/ img {
+            max-height: 180px;
             max-width: 100%;
-            border: 1px solid rgba(158,158,158,.3);
+            border: 1px solid #e2e2e2;
             box-sizing: border-box;
+            cursor: pointer;
           }
           /deep/ h4 {
               border-bottom: 0.5px solid rgba(0,0,0,.2);
