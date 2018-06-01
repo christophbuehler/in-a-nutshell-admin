@@ -1,0 +1,13 @@
+<div class="img-container">
+  <div class="img" [attr.title]="url[1]" ngxClipboard
+    (click)="showCopyMsg(url[1])"
+    [cbContent]="'![](' + url[0] + ')'"
+    *ngFor="let url of imageUrls">
+    <div [style.background-image]="'url(' + url[0] + ')'" [attr.data-title]="url[1]"></div>
+  </div>
+</div>
+<div class="file-upload">
+  <b>Upload Images</b><br>
+  <input type="file" placeholder="Upload file" accept=".png,.gif,.jpg" multiple
+    (change)="uploadFile($event)">
+</div>

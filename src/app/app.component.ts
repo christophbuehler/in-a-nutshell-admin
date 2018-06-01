@@ -1,7 +1,7 @@
 import { RequestOptions, Headers } from '@angular/http';
 import { Component, Injectable } from '@angular/core';
 import { TopicService, Topic } from './topic.service';
-import {ReplaySubject, BehaviorSubject,  of as observableOf,  merge as observableMerge,  Observable,  Subject} from 'rxjs';
+import { ReplaySubject, BehaviorSubject,  of as observableOf,  merge as observableMerge,  Observable,  Subject } from 'rxjs';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material';
 import { TopicDatabase, OrderedTopic } from './topic-database';
@@ -24,6 +24,7 @@ export class AppComponent {
     title: new FormControl(),
     body: new FormControl(),
   });
+  mode = 'view';
 
   constructor(
     private topicService: TopicService,
@@ -78,14 +79,6 @@ export class AppComponent {
     };
     this.topicService.addTopic(topic);
     this.selectTopic(topic.id);
-  }
-
-  uploadFile(event) {
-    const files = Array.from(event.target.files);
-
-    files.reduce<Observable<any>>((seq: Observable<any>, file) => seq
-      .mergeMap(() => this.topicService.uploadFile(file)), observableOf(true))
-      .subscribe(() => alert('Upload successful!'), e => alert('An error occured ' + e));
   }
 
   saveTopic() {

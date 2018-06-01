@@ -4,10 +4,10 @@
       <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
         <li class="mat-tree-node" [class.active]="node.id === (topic | async)?.id">
           <!-- <button mat-icon-button disabled></button> -->
-          <button class="title" mat-button (click)="selectTopic(node.id)">
+          <button fxFlex class="title" mat-button (click)="selectTopic(node.id)">
             {{node.title}}
           </button>
-          <button mat-icon-button title="Add Sub Topic" (click)="createTopic(node)">
+          <button *ngIf="mode === 'edit'" class="add-sub-topic-btn" mat-icon-button title="Add Sub Topic" (click)="createTopic(node)">
             <mat-icon>add</mat-icon>
           </button>
         </li>
@@ -20,10 +20,10 @@
                 {{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
               </mat-icon>
             </button> -->
-            <button class="title" mat-button (click)="selectTopic(node.id)">
+            <button fxFlex class="title" mat-button (click)="selectTopic(node.id)">
               {{node.title}}
             </button>
-            <button mat-icon-button title="Add Sub Topic" (click)="createTopic(node)">
+            <button *ngIf="mode === 'edit'" class="add-sub-topic-btn" mat-icon-button title="Add Sub Topic" (click)="createTopic(node)">
               <mat-icon>add</mat-icon>
             </button>
           </div>
@@ -34,23 +34,23 @@
         </li>
       </mat-nested-tree-node>
     </mat-tree>
-    <div fxLayout="row" fxLayoutAlign="center center" class="new-topic-btn">
-      <button mat-button (click)="createTopic()" *ngIf="(topicId | async) !== -1">
+    <span fxFlex></span>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button *ngIf="!(topicId | async) || !group.dirty" class="new-topic-btn"
+        (click)="createTopic()" mat-button>
         <mat-icon>add</mat-icon>
-        new topic
+        Create New Topic
       </button>
     </div>
-    <span fxFlex></span>
-    <div class="file-upload">
-      <b>upload images</b><br>
-      <input type="file" (change)="uploadFile($event)" placeholder="Upload file" accept=".png,.gif,.jpg" multiple>
-    </div>
   </mat-drawer>
-  <mat-drawer-content>
-    <span *ngIf="!(topic | async)">Please select a topic.</span>
+  <mat-drawer-content fxLayout="column">
+    <div fxFlex class="select-topic" *ngIf="!(topic | async)" fxLayoutAlign="center center" fxLayout="column">
+      <span>Welcome to In a Nutshell!<br>Select a topic to get started.</span>
+    </div>
     <div class="inner" *ngIf="topic | async">
       <form [formGroup]="group">
-        <div>
+        <h1>{{(topic | async)?.title}}</h1>
+        <div *ngIf="mode === 'edit'">
           <mat-form-field>
             <input matInput placeholder="Title" formControlName="title">
           </mat-form-field><br>
@@ -64,19 +64,32 @@
           </button>
         </div>
         <div class="body" fxLayout="row">
-          <div fxLayout="column">
+          <div *ngIf="mode === 'edit'" fxLayout="column">
             <b>Content (Markdown Syntax)</b>
+            <app-image-picker></app-image-picker>
             <textarea fxFlex formControlName="body" cols="30" rows="10"></textarea>
           </div>
           <div fxLayout="column">
-            <b>Preview</b>
+            <!-- <b>Preview</b> -->
             <markdown fxFlex [data]="group.controls.body.value"></markdown>
           </div>
         </div>
       </form>
     </div>
-    <button class="save-btn" *ngIf="topic && group.dirty" (click)="saveTopic()" mat-fab>
-      <mat-icon>save</mat-icon>
-    </button>
+    <div fxLayout="row" fxLayoutAlign="center center" class="extended-fab-switch mat-elevation-z2">
+      <button *ngIf="(topicId | async) && group.dirty" class="save-btn"
+        (click)="saveTopic()" mat-button>
+        <mat-icon>save</mat-icon>
+        Save Changes
+      </button>
+      <button *ngIf="!group.dirty" [class.active]="mode === 'edit'" class="edit-btn"
+        (click)="mode = 'edit'" mat-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="!group.dirty" [class.active]="mode === 'view'" class="view-btn"
+        (click)="mode = 'view'" mat-button>
+        <mat-icon>remove_red_eye</mat-icon>
+      </button>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>

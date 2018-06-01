@@ -1,0 +1,9 @@
+<button (click)="show()" mat-icon-button>
+  <mat-icon>image</mat-icon>
+</button>
+
+<!-- images dialog -->
+<ng-template class="images-overlay" cdk-portal #imagesTemplatePortal>
+  <app-image-picker-overlay></app-image-picker-overlay>
+</ng-template>
+

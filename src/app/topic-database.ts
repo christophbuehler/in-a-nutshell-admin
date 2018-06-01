@@ -13,7 +13,6 @@ export class TopicDatabase {
     topic: TopicService,
   ) {
     topic.topics.pipe(
-      tap(d => console.log("data change", d)),
       tap(t => this.initialize(t)),
     ).subscribe();
   }
