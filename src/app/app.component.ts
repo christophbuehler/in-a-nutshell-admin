@@ -57,15 +57,6 @@ export class AppComponent {
       .subscribe(data => this.nestedDataSource.data = data);
   }
 
-
-  // isExpanded(topic: OrderedTopic) {
-  //   this.topic.pipe(
-  //     map(t => t
-  //       ? t.)
-  //   )
-  //   return this.nestedTreeControl.isExpanded(topic) ||
-  // }
-
   selectTopic(id: number) {
    this.topicId.next(id);
   }
