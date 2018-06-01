@@ -58,12 +58,11 @@
         </div>
         <div class="body" fxLayout="row">
           <div *ngIf="mode === 'edit'" fxLayout="column">
-            <b>Content (Markdown Syntax)</b>
+            <!-- <b>Content (Markdown Syntax)</b> -->
             <app-image-picker></app-image-picker>
             <textarea fxFlex formControlName="body" cols="30" rows="10"></textarea>
           </div>
           <div fxLayout="column">
-            <!-- <b>Preview</b> -->
             <markdown fxFlex [data]="group.controls.body.value"></markdown>
           </div>
         </div>
