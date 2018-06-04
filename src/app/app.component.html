@@ -44,12 +44,14 @@
       <div fxFlex *ngIf="mode === 'edit'" class="edit-ui">
         <form [formGroup]="group" fxLayout="column">
           <header fxLayout="row">
-            <div class="input" data-placeholder="Title" fxFlex>
-              <input type="text" formControlName="title">
-            </div>
-            <div class="input" data-placeholder="Path" fxFlex>
-              <input type="text" formControlName="path">
-            </div>
+            <mat-form-field class="title" fxFlex appearance="outline">
+              <mat-label>Title</mat-label>
+              <input formControlName="title" matInput>
+            </mat-form-field>
+            <mat-form-field fxFlex appearance="outline">
+              <mat-label>Path</mat-label>
+              <input formControlName="path" matInput>
+            </mat-form-field>
             <button mat-icon-button [matMenuTriggerFor]="menu">
               <mat-icon>more_vert</mat-icon>
             </button>
@@ -61,10 +63,12 @@
             </mat-menu>
           </header>
           <div class="actions" fxLayout="row">
-            <span fxFlex>Markup syntax is supported by In a Nutshell.</span>
             <app-image-picker></app-image-picker>
           </div>
-          <textarea fxFlex formControlName="body" cols="30" rows="10"></textarea>
+          <mat-form-field class="body" fxFlex appearance="outline">
+            <mat-label>Topic Content</mat-label>
+            <textarea matInput formControlName="body"></textarea>
+          </mat-form-field>
         </form>
       </div>
       <div fxFlex class="view-ui">

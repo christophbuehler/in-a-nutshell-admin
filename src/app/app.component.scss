@@ -14,6 +14,7 @@
       background: #FCFCFC;
       width: 320px;
       border-right: 1px solid rgba(0, 0, 0, 0.12);
+      overflow: hidden;
       ::-webkit-scrollbar {
         width: 8px;
       }
@@ -99,36 +100,9 @@
         form {
           height: 100%;
           header {
-            padding: 16px;
-            .input {
-              position: relative;
-              margin-right: 8px;
-              &:before {
-                display: inline-block;
-                content: attr(data-placeholder);
-                position: absolute;
-                left: 6px;
-                top: -8px;
-                padding: 0 2px;
-                background: #fff;
-                color: #aaa;
-                font-size: 10px;
-              }
-              input {
-                width: 100%;
-                height: 42px;
-                line-height: 42px;
-                border: 1px solid #aaa;
-                border-radius: 4px;
-                padding: 0 8px;
-                box-sizing: border-box;
-                font-family: 'Roboto', sans-serif;
-                font-size: 16px;
-                font-weight: 400;
-                &:focus {
-                  outline: none;
-                }
-              }
+            padding: 16px 16px 0;
+            .title {
+              margin-right: 16px;
             }
           }
           .actions {
@@ -137,13 +111,16 @@
             line-height: 40px;
             font-size: 16px;
           }
-          textarea {
-            width: 100%;
-            border: none;
-            font-family: 'Roboto', sans-serif;
-            padding: 16px;
-            &:focus {
-              outline: none;
+          mat-form-field.body {
+            margin: 16px;
+            textarea {
+              box-sizing: border-box;
+              width: 100%;
+              border: none;
+              font-family: 'Roboto', sans-serif;
+              &:focus {
+                outline: none;
+              }
             }
           }
         }

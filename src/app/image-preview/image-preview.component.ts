@@ -18,7 +18,7 @@ export class ImagePreviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const rectFullBleed = {
+    const stylesFullBleed = {
       left: 0,
       top: 0,
       width: '100%',
@@ -27,7 +27,7 @@ export class ImagePreviewComponent implements OnInit {
 
     const container: HTMLImageElement = this.container.nativeElement;
     const containerClick = fromEvent(container, 'click');
-    const imageRect = this.image.pipe(
+    const imageStyles = this.image.pipe(
       filter(img => Boolean(img)),
       map(img => img.getBoundingClientRect()),
       map((rect) => ({
@@ -38,17 +38,17 @@ export class ImagePreviewComponent implements OnInit {
       })),
     );
 
-    imageRect.pipe(
+    imageStyles.pipe(
       tap(rect => Object.assign(container.style, rect)),
       tap(() => this.show = true),
-      debounceTime(10),
-      tap(() => Object.assign(container.style, rectFullBleed)),
+      debounceTime(100),
+      tap(() => Object.assign(container.style, stylesFullBleed)),
     ).subscribe();
 
     containerClick.pipe(
-      withLatestFrom(imageRect),
+      withLatestFrom(imageStyles),
       tap(([ev, rect]) => Object.assign(container.style, rect)),
-      debounceTime(200),
+      debounceTime(400),
       tap(() => this.show = false),
     ).subscribe();
   }
