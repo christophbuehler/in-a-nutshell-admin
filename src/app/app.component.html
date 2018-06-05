@@ -42,7 +42,7 @@
     </div>
     <div class="inner" [class.hide]="!(topic | async)" fxLayout="row">
       <div fxFlex *ngIf="mode === 'edit'" class="edit-ui">
-        <form [formGroup]="group" fxLayout="column">
+        <form [formGroup]="group">
           <header fxLayout="row">
             <mat-form-field class="title" fxFlex appearance="outline">
               <mat-label>Title</mat-label>
@@ -67,7 +67,7 @@
           </div>
           <mat-form-field class="body" fxFlex appearance="outline">
             <mat-label>Topic Content</mat-label>
-            <textarea matInput formControlName="body"></textarea>
+            <textarea matTextareaAutosize matInput formControlName="body"></textarea>
           </mat-form-field>
         </form>
       </div>
