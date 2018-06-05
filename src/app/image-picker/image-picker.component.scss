@@ -1,3 +1,18 @@
 :host {
   display: block;
+  button {
+    color: #5f6368;
+    line-height: 24px;
+    border-radius: 4px;
+    border: 1px solid #E0E0E0;
+    padding: 8px 0;
+    box-sizing: border-box;
+    &:hover {
+      padding: 7px 0;
+      border: 2px solid #000;
+    }
+    mat-icon {
+      margin-right: 2px;
+    }
+  }
 }
