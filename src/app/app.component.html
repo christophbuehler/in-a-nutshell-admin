@@ -76,17 +76,17 @@
         <markdown #markdownUi fxFlex [data]="group.controls.body.value"></markdown>
       </div>
     </div>
-    <div fxLayout="row" *ngIf="topicId | async" fxLayoutAlign="center center" class="extended-fab-switch mat-elevation-z2">
-      <button *ngIf="group.dirty" class="save-btn"
+    <div fxLayout="row" *ngIf="topicId | async" fxLayoutAlign="center center" [class.save]="group.dirty" class="extended-fab-switch mat-elevation-z2">
+      <button class="save-btn"
         (click)="saveTopic()" mat-button>
         <mat-icon>save</mat-icon>
         Save Changes
       </button>
-      <button *ngIf="!group.dirty" [class.active]="mode === 'edit'" class="edit-btn"
+      <button [class.active]="mode === 'edit'" class="edit-btn"
         (click)="mode = 'edit'" mat-button>
         <mat-icon>edit</mat-icon>
       </button>
-      <button *ngIf="!group.dirty" [class.active]="mode === 'view'" class="view-btn"
+      <button [class.active]="mode === 'view'" class="view-btn"
         (click)="mode = 'view'" mat-button>
         <mat-icon>remove_red_eye</mat-icon>
       </button>

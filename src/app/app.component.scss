@@ -125,6 +125,7 @@
               width: 100%;
               border: none;
               font-family: 'Roboto', sans-serif;
+              padding: 0;
               &:focus {
                 outline: none;
               }
@@ -176,6 +177,19 @@
     padding: 0 12px;
     overflow: hidden;
     background: #fff;
+    transition: all .2s ease;
+    &.save {
+      width: 180px;
+      margin-left: -90px;
+      .mat-button {
+        &.save-btn {
+          display: block;
+        }
+        &.edit-btn, &.view-btn {
+          display: none;
+        }
+      }
+    }
     .mat-button {
       color: rgb(95, 99, 104);
       line-height: 42px;
@@ -184,10 +198,11 @@
       border-radius: 0;
       &.save-btn {
         color: #4283f2;
-        width: 120px;
+        width: 156px;
+        display: none;
       }
       &.edit-btn, &.view-btn {
-        width: 60px;
+        width: 48px;
         min-width: 0;
         padding: 0;
         &:hover {
