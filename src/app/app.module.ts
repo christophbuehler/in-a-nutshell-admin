@@ -15,6 +15,8 @@ import { TopicDatabase } from './topic-database';
 import { ImagePickerComponent } from './image-picker/image-picker.component';
 import { ImagePickerOverlayComponent } from './image-picker/image-picker-overlay.component';
 import { ImagePreviewComponent } from './image-preview/image-preview.component';
+import { PrintViewComponent } from './print-view/print-view.component';
+import { ChooseSystemDialogComponent } from './choose-system-dialog/choose-system-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { ImagePreviewComponent } from './image-preview/image-preview.component';
     ImagePickerComponent,
     ImagePickerOverlayComponent,
     ImagePreviewComponent,
+    PrintViewComponent,
+    ChooseSystemDialogComponent,
   ],
   imports: [
     BrowserModule,
